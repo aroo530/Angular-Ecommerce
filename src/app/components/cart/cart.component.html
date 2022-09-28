@@ -1,0 +1,43 @@
+<div class="cart-container">
+
+    <div class="cart-item">
+        <div *ngIf="isEmpty(); else EmptyCart" class="cart-item-details">
+            <div class="cart-item" *ngFor="let product of getCart()">
+                <button (click)="removeProduct(product)" class="transparent">
+                    <img src="{{product.url}}">
+                </button>
+                <div class="cart-item-details">
+                    <p>{{product.name}}</p>
+                    <p>${{product.price}}</p>
+                    <input class="number-input" type="number" value="{{product.quantity}}"
+                        (input)="updateQuantity($event,product)">
+                </div>
+            </div>
+            <h1>
+                Total: ${{getTotal()}}
+            </h1>
+        </div>
+
+        <ng-template #EmptyCart>
+            <div class="cart-item-details">
+                <p>Your cart is empty</p>
+                add some products in the <a routerLink="">products page</a>
+            </div>
+        </ng-template>
+
+        <div class="cart-item">
+            <form class="form-margin form-group" class="cart-item-details" [formGroup]="confirmForm"
+                (ngSubmit)="confirm()">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" formControlName="name" />
+                <label for="address">Adress</label>
+                <input type="text" class="form-control" formControlName="address" />
+                <label for="creditCard">Credit card</label>
+                <input type="text" class="form-control" formControlName="creditCard" />
+                <small>we won't share your data</small>
+                <button type="submit" class="btn btn-primary" [disabled]="">Submit</button>
+            </form>
+
+        </div>
+
+    </div>

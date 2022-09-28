@@ -1,0 +1,9 @@
+<div class="product-container">
+  <a href="product/{{product.id}}">
+    <img src="{{product.url}}" alt="" class="product-image">
+  </a>
+  <p class="name">{{product.name}}</p>
+  <p class="price">${{product.price}}</p>
+  <app-select-add [id]="product.id"></app-select-add>
+
+</div>
