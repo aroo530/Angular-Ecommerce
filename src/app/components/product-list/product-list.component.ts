@@ -11,12 +11,11 @@ export class ProductListComponent implements OnInit {
     constructor(private data: ProductService) {}
 
     ngOnInit(): void {
-        console.log('--- ngOnInit :: ');
         this.getProducts().then();
     }
     async getProducts(): Promise<void> {
         let tmp = await this.data.getProducts();
-        if (tmp) {
+        if (tmp != undefined) {
             this.productsList = tmp;
         }
     }

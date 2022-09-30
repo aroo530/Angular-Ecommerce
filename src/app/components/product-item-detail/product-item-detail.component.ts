@@ -24,11 +24,13 @@ export class ProductItemDetailComponent implements OnInit {
 
     ngOnInit(): void {
         this.id = this.route.snapshot.params['id'];
+        console.log(this.id);
         this.updateProduct();
     }
 
     async updateProduct() {
         let tmp = await this.productService.getProduct(this.id);
+        console.log(tmp);
         if (tmp) {
             this.product = tmp;
         }
