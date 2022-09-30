@@ -1,6 +1,7 @@
 <div class="cart-container">
 
     <div class="cart-item">
+
         <div *ngIf="isEmpty(); else EmptyCart" class="cart-item-details">
             <div class="cart-item" *ngFor="let product of getCart()">
                 <button (click)="removeProduct(product)" class="transparent">
@@ -14,13 +15,13 @@
                 </div>
             </div>
             <h1>
-                Total: ${{getTotal()}}
+                Total: {{getTotal()}}
             </h1>
         </div>
         <ng-template #EmptyCart>
             <div class="cart-item-details">
                 <p>Your cart is empty</p>
-                add some products in the <a routerLink="">products page</a>
+                add some products in the <a routerLink="/">products page</a>
             </div>
         </ng-template>
 

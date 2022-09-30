@@ -8,7 +8,7 @@ import { ProductService, Product } from './product.service';
 export class CartService {
     cart: Product[] = [];
     clientName: string = '';
-    totalPrice: number = 0;
+    totalPrice: string = '';
 
     product: Product = {
         id: 0,
@@ -56,14 +56,17 @@ export class CartService {
 
         this.localStorage.setCart(this.cart);
     }
-    getTotal(): number {
+    getTotal(): string {
         let total = 0;
 
         this.cart.forEach((p: Product) => {
             total += Number(p.price * (p.quantity ?? 1));
         });
 
-        this.totalPrice = total;
+        this.totalPrice = Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: 'USD',
+        }).format(total);
         return this.totalPrice;
     }
 
