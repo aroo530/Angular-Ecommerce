@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
-import { Product, ProductService } from 'src/app/product.service';
+import { Product, ProductService } from 'src/app/services/product.service';
 import { ActivatedRoute } from '@angular/router';
 @Component({
     selector: 'app-product-item-detail',
@@ -24,16 +24,14 @@ export class ProductItemDetailComponent implements OnInit {
 
     ngOnInit(): void {
         this.id = this.route.snapshot.params['id'];
-        // this.route.queryParams.subscribe((params) => {
-        //   this.id = params['id'];
-        // });
         this.updateProduct();
-        // console.log('--- id :: ', this.id);
     }
 
     async updateProduct() {
-        this.product = await this.productService.getProduct(this.id);
-        // console.log('--- productItem :: ', this.product);
+        let tmp = await this.productService.getProduct(this.id);
+        if (tmp) {
+            this.product = tmp;
+        }
         return this.product;
     }
 }

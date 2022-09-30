@@ -17,7 +17,6 @@
                 Total: ${{getTotal()}}
             </h1>
         </div>
-
         <ng-template #EmptyCart>
             <div class="cart-item-details">
                 <p>Your cart is empty</p>
@@ -26,6 +25,7 @@
         </ng-template>
 
         <div class="cart-item">
+            <!-- <p>Form Status: {{ confirmForm.status }}</p> -->
             <form class="form-margin form-group" class="cart-item-details" [formGroup]="confirmForm"
                 (ngSubmit)="confirm()">
                 <label for="name">Name</label>
@@ -35,7 +35,8 @@
                 <label for="creditCard">Credit card</label>
                 <input type="text" class="form-control" formControlName="creditCard" />
                 <small>we won't share your data</small>
-                <button type="submit" class="btn btn-primary" [disabled]="">Submit</button>
+                <small>please fill all fields</small>
+                <button type="submit" class="btn btn-primary" [disabled]="confirmForm.invalid">Submit</button>
             </form>
 
         </div>

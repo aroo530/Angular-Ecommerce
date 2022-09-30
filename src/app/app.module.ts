@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
-// import { RouterTestingModule } from '@angular/router/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientModule } from '@angular/common/http';
 // Components
 import { AppComponent } from './app.component';
@@ -13,7 +13,7 @@ import { ProductItemComponent } from './components/product-item/product-item.com
 import { ProductListComponent } from './components/product-list/product-list.component';
 import { HeaderComponent } from './layout/header/header.component';
 import { SelectAddComponent } from './components/select-add/select-add.component';
-import { ProductService } from './product.service';
+import { ProductService } from './services/product.service';
 
 const routes: Routes = [
     { path: 'cart', component: CartComponent },
@@ -38,6 +38,7 @@ const routes: Routes = [
         BrowserModule,
         FormsModule,
         ReactiveFormsModule,
+        RouterTestingModule,
         RouterModule.forRoot(routes),
     ],
     providers: [ProductService],

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { Product, ProductService } from 'src/app/product.service';
+import { FormBuilder, Validators } from '@angular/forms';
+import { Product } from 'src/app/services/product.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { CartService } from 'src/app/cart.service';
+import { CartService } from 'src/app/services/cart.service';
 
 @Component({
     selector: 'app-cart',
@@ -10,11 +10,14 @@ import { CartService } from 'src/app/cart.service';
     styleUrls: ['./cart.component.css'],
 })
 export class CartComponent implements OnInit {
+    // TODO: output validators errors
+    //
     confirmForm = this.formBuilder.group({
-        name: '',
-        address: '',
-        creditCard: '',
+        name: ['', Validators.required],
+        address: ['', Validators.required],
+        creditCard: ['', Validators.required],
     });
+
     product: Product = {
         id: 1,
         name: 'Product 1',
@@ -38,17 +41,23 @@ export class CartComponent implements OnInit {
     removeProduct(product: Product) {
         this.cartService.removeProduct(product);
     }
+
     getTotal() {
         return this.cartService.getTotal();
     }
     updateQuantity(event: any, product: Product) {
         // console.log('--- event :: ', event);
         // console.log('--- product :: ', product);
-        this.cartService.updateQuantity(event, product);
+        if (event.target.value > 0) {
+            this.cartService.updateQuantity(event.target.value, product);
+        } else {
+            this.cartService.removeProduct(product);
+        }
     }
     confirm() {
         // console.log('--- confirm :: ', this.confirmForm.value);
-        localStorage.removeItem('cart');
+        this.cartService.clientName = this.confirmForm.value.name ?? '';
+        this.cartService.emptyCart();
         this.router.navigate(['/confirm'], { relativeTo: this.route });
     }
 

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { CartService } from 'src/app/cart.service';
+import { CartService } from 'src/app/services/cart.service';
 
 @Component({
     selector: 'app-select-add',
@@ -21,9 +21,8 @@ export class SelectAddComponent implements OnInit {
 
     addToCart() {
         // this.cartForm.value.quantity
-        console.log('--- this.id :: ', this.productId);
         this.cartService.addToCart(
-            this.cartForm.value.quantity!,
+            this.cartForm.value.quantity ?? 1,
             this.productId
         );
         alert('Added to cart');

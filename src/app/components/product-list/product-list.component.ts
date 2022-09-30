@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Product, ProductService } from 'src/app/product.service';
+import { Product, ProductService } from 'src/app/services/product.service';
 
 @Component({
     selector: 'app-product-list',
@@ -15,6 +15,9 @@ export class ProductListComponent implements OnInit {
         this.getProducts().then();
     }
     async getProducts(): Promise<void> {
-        this.productsList = await this.data.getProducts();
+        let tmp = await this.data.getProducts();
+        if (tmp) {
+            this.productsList = tmp;
+        }
     }
 }
