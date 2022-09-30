@@ -18,7 +18,7 @@ export class ProductService {
     async getProduct(id: number): Promise<Product | undefined> {
         const tmp = await this.getProducts();
         if (!tmp) return;
-        return tmp.find((p: Product) => p.id === id);
+        return tmp.find((p: Product) => Number(p.id) === Number(id));
     }
 }
 

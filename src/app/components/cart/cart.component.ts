@@ -46,8 +46,6 @@ export class CartComponent implements OnInit {
         return this.cartService.getTotal();
     }
     updateQuantity(event: any, product: Product) {
-        // console.log('--- event :: ', event);
-        // console.log('--- product :: ', product);
         if (event.target.value > 0) {
             this.cartService.updateQuantity(event.target.value, product);
         } else {
@@ -55,10 +53,9 @@ export class CartComponent implements OnInit {
         }
     }
     confirm() {
-        // console.log('--- confirm :: ', this.confirmForm.value);
         this.cartService.clientName = this.confirmForm.value.name ?? '';
         this.cartService.emptyCart();
-        this.router.navigate(['/confirm'], { relativeTo: this.route });
+        this.router.navigate(['confirm'], { relativeTo: this.route });
     }
 
     isEmpty(): boolean {

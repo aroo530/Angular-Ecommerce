@@ -17,6 +17,6 @@ export class ConfirmationComponent implements OnInit {
     total = this.cartService.totalPrice;
     ngOnInit(): void {}
     toProduct() {
-        this.router.navigate(['/'], { relativeTo: this.route });
+        this.router.navigate([''], { relativeTo: this.route });
     }
 }

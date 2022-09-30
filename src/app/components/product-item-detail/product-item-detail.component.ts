@@ -31,9 +31,7 @@ export class ProductItemDetailComponent implements OnInit {
     async updateProduct() {
         let tmp = await this.productService.getProduct(this.id);
         console.log(tmp);
-        if (tmp) {
-            this.product = tmp;
-        }
+        this.product = tmp ?? this.product;
         return this.product;
     }
 }
